@@ -1,0 +1,53 @@
+#!/bin/bash
+#Author: https://github.com/zajac-h 
+
+set -e errexit
+
+i_flag='' #install RustDedicated
+u_flag='' #update 
+r_flag='' #run
+o_flag='' #install oxide (uMod)
+h_flag='' #print help
+
+print_usage() {
+    echo "Usage:"
+    echo "-i (--install) install Rust server"
+    echo "-u (--update) update Rust server"
+    echo "-r (--run) run Rust server"
+    echo "-o (--oxide) install Oxide (uMod)"
+    echo "-h (--help) print help"
+}
+
+#while getopts 'iuroh' flag; do
+#    case "${flag}" in
+#        i) i_flag='true' ;;
+#        u) u_flag='true' ;;
+#        r) r_flag='true' ;;
+#        o) o_flag='true' ;;
+#        h) print_usage
+#           exit 1 ;;
+#        *) print_usage
+#           exit 1 ;;
+#    esac
+#done
+
+while test $# -gt 0; do
+    case "$1" in
+        -i|--install) i_flag='true' ;;
+        -u|--update) u_flag='true' ;;
+        -r|--run) r_flag='true' ;;
+        -o|--oxide) o_flag='true' ;;
+        -h|--help) print_usage && exit 1 ;;
+        *) echo "Unknown command." && print_usage && break ;;
+    esac
+done
+
+if [[ $i_flag == 'true' ]] ; then
+    mkdir SteamCMD && cd SteamCMD
+    curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" && tar zxf -
+
+    ./steamcmd.sh +login anonymous +force_install_dir .. +app_update 258550 validate +quit
+
+    echo 'Installed succesfully.'
+    exit 1 
+fi
