@@ -4,6 +4,7 @@
 i_flag='' #install RustDedicated
 u_flag='' #update 
 r_flag='' #run
+v_flag='' #validate install
 o_flag='' #install oxide (uMod)
 h_flag='' #print help
 
@@ -13,6 +14,7 @@ print_usage() {
     echo "  -i (--install) install Rust server"
     echo "  -u (--update) update Rust server"
     echo "  -r (--run) run Rust server"
+    echo "  -v (--validate) validate install"
     echo "  -o (--oxide) install Oxide (uMod)"
     echo "  -h (--help) print help"
     echo ""
@@ -55,7 +57,7 @@ if [[ $i_flag == 'true' ]] ; then
     wget "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" || error "Failed to download SteamCMD."
     tar -vzxf steamcmd_linux.tar.gz || error "Failed to extract the archive."
     
-    ./steamcmd.sh +login anonymous +force_install_dir .. +app_update 258550 validate +quit
+    ./steamcmd.sh +login anonymous +force_install_dir .. +app_update 258550 validate +quit || error "Installation failed."
     
     cd ..
 
