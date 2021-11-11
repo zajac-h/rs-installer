@@ -18,6 +18,20 @@ print_usage() {
     echo ""
 }
 
+space() {
+    local message="$1"
+
+    echo " "
+    echo "${message}"
+    echo " "
+}
+
+error() {
+    local error_message="$1"
+    echo "${error_message}"
+    echo " "
+    exit 1 
+}
 
 while test $# -gt 0; do
     case "$1" in
@@ -32,25 +46,26 @@ done
 
 
 if [[ $i_flag == 'true' ]] ; then
-    echo "Installing Rust server."
+    space "Installing Rust server."
 
     mkdir SteamCMD && cd SteamCMD
-    wget "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" && tar -zxf - || echo "Failed to download SteamCMD" ; exit 1
+    wget "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" || error "Failed to download SteamCMD."
+    tar -vzxf steamcmd_linux.tar.gz || error "Failed to untar the archive." 
     ./steamcmd.sh +login anonymous +force_install_dir .. +app_update 258550 validate +quit
     cd ..
 
-    echo "Installed succesfully."
+    space "Installed succesfully."
 fi
 
 
 if [[ $u_flag == 'true' ]] ; then
-    echo "Updating Rust server."
+    space "Updating Rust server."
 
-    cd SteamCMD || echo "Seems that SteamCMD is missing. Ensure that you have installed Rust server." ; exit 1
+    cd SteamCMD || error "Seems that server isn't installed, make sure to run ./rs_manager -i before updating."
     ./steamcmd.sh +login anonymous +force_install_dir .. +app_update 258550 validate +quit
     cd ..
 
-    echo "Updated succesfully."
+    space "Updated succesfully."
 fi
 
 exit 0
