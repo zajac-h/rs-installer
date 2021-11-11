@@ -8,12 +8,14 @@ o_flag='' #install oxide (uMod)
 h_flag='' #print help
 
 print_usage() {
+    echo ""
     echo "Usage:"
-    echo "-i (--install) install Rust server"
-    echo "-u (--update) update Rust server"
-    echo "-r (--run) run Rust server"
-    echo "-o (--oxide) install Oxide (uMod)"
-    echo "-h (--help) print help"
+    echo "  -i (--install) install Rust server"
+    echo "  -u (--update) update Rust server"
+    echo "  -r (--run) run Rust server"
+    echo "  -o (--oxide) install Oxide (uMod)"
+    echo "  -h (--help) print help"
+    echo ""
 }
 
 
