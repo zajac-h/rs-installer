@@ -33,6 +33,8 @@ error() {
     exit 1 
 }
 
+[ -z "$1" ] && print_usage  
+
 while test $# -gt 0; do
     case "$1" in
         -i|--install) i_flag='true'                 && break ;;
@@ -48,10 +50,13 @@ done
 if [[ $i_flag == 'true' ]] ; then
     space "Installing Rust server."
 
-    mkdir SteamCMD && cd SteamCMD
+    mkdir SteamCMD 
+    cd SteamCMD 
     wget "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" || error "Failed to download SteamCMD."
-    tar -vzxf steamcmd_linux.tar.gz || error "Failed to untar the archive." 
+    tar -vzxf steamcmd_linux.tar.gz || error "Failed to extract the archive."
+    
     ./steamcmd.sh +login anonymous +force_install_dir .. +app_update 258550 validate +quit
+    
     cd ..
 
     space "Installed succesfully."
