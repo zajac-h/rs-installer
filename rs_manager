@@ -1,8 +1,6 @@
 #!/bin/bash
 #Author: https://github.com/zajac-h 
 
-set -e errexit
-
 i_flag='' #install RustDedicated
 u_flag='' #update 
 r_flag='' #run
@@ -33,21 +31,36 @@ print_usage() {
 
 while test $# -gt 0; do
     case "$1" in
-        -i|--install) i_flag='true' ;;
-        -u|--update) u_flag='true' ;;
-        -r|--run) r_flag='true' ;;
-        -o|--oxide) o_flag='true' ;;
-        -h|--help) print_usage && exit 1 ;;
-        *) echo "Unknown command." && print_usage && break ;;
+        -i|--install) i_flag='true'                 && break ;;
+        -u|--update) u_flag='true'                  && break ;;
+        -r|--run) r_flag='true'                     && break ;;
+        -o|--oxide) o_flag='true'                   && break ;;
+        -h|--help) print_usage                      && exit 1 ;;
+        *) echo "Unknown command." && print_usage   && exit 1 ;;
     esac
 done
 
+
 if [[ $i_flag == 'true' ]] ; then
+    echo "Installing Rust server."
+
     mkdir SteamCMD && cd SteamCMD
-    curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" && tar zxf -
-
+    wget "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" && tar -zxf - || echo "Failed to download SteamCMD" ; exit 1
     ./steamcmd.sh +login anonymous +force_install_dir .. +app_update 258550 validate +quit
+    cd ..
 
-    echo 'Installed succesfully.'
-    exit 1 
+    echo "Installed succesfully."
 fi
+
+
+if [[ $u_flag == 'true' ]] ; then
+    echo "Updating Rust server."
+
+    cd SteamCMD || echo "Seems that SteamCMD is missing. Ensure that you have installed Rust server." ; exit 1
+    ./steamcmd.sh +login anonymous +force_install_dir .. +app_update 258550 validate +quit
+    cd ..
+
+    echo "Updated succesfully."
+fi
+
+exit 0
