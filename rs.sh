@@ -64,11 +64,13 @@ if [[ $i_flag == 'true' ]] ; then
 
     space "Installed succesfully."
 fi
+
+
 if [[ $u_flag == 'true' ]] ; then
     space "Updating Rust server."
 
     cd SteamCMD || error "Seems that server isn't installed, make sure to install it first."
-    ./steamcmd.sh +login anonymous +force_install_dir .. +app_update 258550 validate +quit
+    ./steamcmd.sh +login anonymous +force_install_dir .. +app_update 258550 validate +quit || error "SteamCMD seems to be missing."
     cd ..
 
     echo " "
