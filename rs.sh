@@ -10,11 +10,11 @@ h_flag='' #print help
 print_usage() {
     echo ""
     echo "Usage:"
-    echo "  -i (--install) install Rust server"
-    echo "  -u (--update) update Rust server"
-    echo "  -r (--run) run Rust server"
-    echo "  -o (--oxide) install or update Oxide (uMod)"
-    echo "  -h (--help) print help"
+    echo "  install - installs Rust server"
+    echo "  update - updates Rust server"
+    echo "  run - runs Rust server"
+    echo "  oxide - installs or update Oxide (uMod)"
+    echo "  help - prints help"
     echo ""
 }
 
@@ -37,11 +37,11 @@ error() {
 
 while test $# -gt 0; do
     case "$1" in
-        -i|--install) i_flag='true'                 && break ;;
-        -u|--update) u_flag='true'                  && break ;;
-        -r|--run) r_flag='true'                     && break ;;
-        -o|--oxide) o_flag='true'                   && break ;;
-        -h|--help) print_usage                      && exit 1 ;;
+        install) i_flag='true'                  && break ;;
+        update) u_flag='true'                   && break ;;
+        run) r_flag='true'                      && break ;;
+        oxide) o_flag='true'                    && break ;;
+        help) print_usage                       && exit 1 ;;
         *) echo "Unknown command." && print_usage   && exit 1 ;;
     esac
 done
