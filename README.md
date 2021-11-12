@@ -9,7 +9,7 @@
 
 ## Installation proces:
 ##### 1. Install required dependencies.
-##### 2. Download [```rs.sh```](https://raw.githubusercontent.com/zajac-h/rs-installer/main/rs.sh).
+##### 2. Download [```rs.sh```](https://raw.githubusercontent.com/zajac-h/rs-installer/main/rs.sh) or clone this repo.
 ##### 3. Make the downloaded file executable (```chmod +x rs.sh```).
 ##### 4. Run ```./rs.sh install```.
 ##### 5. Change ```rcon.password``` in ```start.sh``` file.
