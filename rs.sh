@@ -92,6 +92,7 @@ if [[ $o_flag == 'true' ]] ; then
     mv develop oxide.zip
     echo " "
     unzip -o oxide.zip
+    rm oxide.zip
 
     space "Oxide installed succesfully."
 fi
