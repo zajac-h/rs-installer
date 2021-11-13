@@ -26,4 +26,4 @@ To change any server properties you simply edit ```start.sh``` file just like ``
 
 ## For newbies:
 Tmux is a terminal multiplexer. It creates a new terminal in which your server runs.
-This way you can always attach it (if you have one session - ```tmux attach -t 0```) when you need to do something there and then detach it (```Ctrl + b  d```) and leave it running in the background. 
+This way you can always attach it (```tmux attach -t rustserver```) when you need to do something there and then detach it (```Ctrl + b  d```) and leave it running in the background. 
